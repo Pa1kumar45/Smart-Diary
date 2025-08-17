@@ -1,6 +1,7 @@
 import express from "express";
 import cors from 'cors'
 import dotenv from "dotenv";
+import path from "path";
 
 import notesRoutes from "./routes/notesRoutes.js";
 import { connectDB } from "./config/db.js";
@@ -12,7 +13,7 @@ dotenv.config();
 
 const app=express();
 const PORT= process.env.PORT||5001;
-
+const __dirname = path.resolve()
 
 //middleware
 // Middleware = Functions that execute BETWEEN request and response
@@ -20,10 +21,12 @@ const PORT= process.env.PORT||5001;
 
 // Built-in middleware: Parses JSON from request body into JavaScript object
 // Without this, req.body would be undefined when receiving JSON data
- app.use(cors({
+if(process.env.NODE_ENV!=="production"){
+app.use(cors({
     origin:"http://localhost:5173",
 }
 ));
+}
 app.use(express.json());
 app.use(ratelimiter);
 
@@ -41,6 +44,13 @@ app.use((req,res,next)=>{
 });
 
 app.use("/api/notes",notesRoutes);// This routes the request to notesRoutes
+
+if(process.env.NODE_ENV==="production"){
+app.use(express.static(path.join(__dirname,"../frontend/dist")))
+app.get("*",(req,res)=>{
+    res.sendFile(path.join(__dirname,"../frontend","dist","index.html"));
+});
+}
 
 // first connect to database and then listen client calls
 connectDB().then(()=>{
