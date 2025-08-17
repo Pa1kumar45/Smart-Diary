@@ -1,10 +1,15 @@
 import {Route,Routes} from 'react-router'
+import { useEffect } from 'react'
 import CreatePage from './pages/CreatePage'
 import HomePage from './pages/HomePage'
 import NoteDetailPage from './pages/NoteDetailPage'
 
 
 const App = () => {
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', 'coffee')
+  }, [])
+
   return (
     <div className="relative h-full w-full">
  
