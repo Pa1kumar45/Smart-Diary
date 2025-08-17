@@ -24,7 +24,7 @@ const ratelimit = new Ratelimit({
     // slidingWindow = Dynamic time window that slides with each request (more fair)
     // Alternative: fixedWindow = Fixed 20-second blocks (resets every 20 seconds exactly)
     // Parameters: (max_requests, time_period)
-    limiter: Ratelimit.slidingWindow(5, "10 s"),
+    limiter: Ratelimit.slidingWindow(100, "10 s"),
     
     // How it works: If user makes 5 requests at 0s, they must wait until 20s for next request
     // Sliding window means if 5 requests made at 5s, next allowed at 25s
