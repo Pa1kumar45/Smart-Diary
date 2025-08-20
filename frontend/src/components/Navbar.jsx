@@ -13,7 +13,7 @@ const Navbar=()=>{
                 {/* Flex container to space items between left and right */}
                 <div className="flex items-center justify-between">
                     {/* App title/logo on the left side */}
-                    <h1 className="text-3xl font-bold text-primary font-mono tracking-tight" >Thinkboard</h1>
+                    <h1 className="text-3xl font-bold text-primary font-mono tracking-tight" >Smart Diary</h1>
                     {/* Right side navigation items */}
                     <div className="flex items-center gap-4">
                         
